@@ -84,12 +84,14 @@ Fares v2のfare_leg_rulesはFares v1の `stops.zone_id` ではなくareaを参�
 
 各並びは大人 / 小児・65歳以上・対象障害者 / 対象障害小児。cashのみ。
 
-#### 乗継割引
+#### 乗継時の追加支払額
 
-- `transfer_discount_standard`: 大人-120、小児-60、65歳以上-60、対象障害者-60、対象障害小児-30。
-- `transfer_discount_full_120`: 120円区間同士に全区分-120。
+- `transfer_pay_120_full`: 120円区間同士では追加0円。
+- `transfer_pay_120_standard`: 2乗車目が120円区間で通常乗継の場合の追加額（大人0、小児等60、対象障害小児90円）。
+- `transfer_pay_240_standard`: 2乗車目が240円区間の場合の割引後追加額。
+- `transfer_pay_270_standard`: 2乗車目が270円区間の場合の割引後追加額。
 
-負額は公式Schedule Referenceで許容され、transfer costとして合算する。
+公式Schedule Referenceは負額商品も許容するが、MobilityData GTFS Validator v8.0.1は負額をエラーとする。そこで `fare_transfer_type=0`（1乗車目A + 乗継商品AB）を使い、ABを「2乗車目の通常運賃から公式割引額を引いた、追加支払額」として0以上で表す。同じ最終運賃を、より広いconsumer/validator互換性で得るための判断である。
 
 ### fare_leg_rules.txt
 
@@ -119,9 +121,9 @@ Fares v2のfare_leg_rulesはFares v1の `stops.zone_id` ではなくareaを参�
 - 南新田・朋来方面 → 住道駅南 → 市役所特定区間
 - 市役所特定区間 → 住道駅南 → 南新田・朋来方面
 
-fare_leg_rulesの該当O-D行だけにleg_group_idを付与する。乗継計算は `fare_transfer_type=1`（1乗車目 + 負の割引商品 + 2乗車目）。公式ページに有効時間の記載がないためduration_limitは空欄。
+fare_leg_rulesの該当O-D行だけにleg_group_idを付与する。乗継計算は `fare_transfer_type=0`（1乗車目 + 2乗車目での追加支払額）。公式ページに有効時間の記載がないためduration_limitは空欄。
 
-120円区間同士かどうかを判定できるようleg groupを価格帯別に分け、両方が120円なら `transfer_discount_full_120`、それ以外はstandardを適用する。
+120/240/270円のどの区間かを判定できるようleg groupを価格帯別に分け、両方が120円なら `transfer_pay_120_full`、それ以外は2乗車目の価格帯に対応するstandard商品を適用する。
 
 ## 240円 / 270円 / 120円
 

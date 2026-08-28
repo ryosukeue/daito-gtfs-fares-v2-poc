@@ -1,0 +1,143 @@
+{
+  "generated_from": "data/processed Fares v2 tables",
+  "disclaimer": "GTFS仕様上の表現例。特定アプリでの表示・計算対応を保証しない。",
+  "examples": [
+    {
+      "id": "special_section",
+      "title": "住道駅前［北］ → 大東市役所庁舎前",
+      "before": "Fares v1では成人120円だけを取得可能。小児も割引なしである理由や支払媒体は分からない。",
+      "after": {
+        "legs": [
+          {
+            "route_id": "R2",
+            "route_name": "三箇方面コース",
+            "network_id": "daito_community",
+            "from_stop_id": "S11_1",
+            "from_stop_name": "住道駅前［北］",
+            "to_stop_id": "S10_1",
+            "to_stop_name": "大東市役所庁舎前",
+            "from_area_id": "area_S11_1",
+            "to_area_id": "area_S10_1",
+            "leg_group_id": "station_to_cityhall_west_120",
+            "fare_product_id": "community_120",
+            "fare_product_name": "コミュニティバス特定区間",
+            "rider_category_id": "child",
+            "fare_media_id": "child_icoca",
+            "amount": 120
+          }
+        ],
+        "transfer_product_id": "",
+        "transfer_adjustment": 0,
+        "total": 120
+      },
+      "note": "特定区間は割引対象外のため、小児も120円。"
+    },
+    {
+      "id": "community_senior",
+      "title": "住道駅前［北］ → 三箇西",
+      "before": "Fares v1では成人270円のみ。",
+      "after": {
+        "legs": [
+          {
+            "route_id": "R1",
+            "route_name": "三箇方面コース",
+            "network_id": "daito_community",
+            "from_stop_id": "S11_1",
+            "from_stop_name": "住道駅前［北］",
+            "to_stop_id": "S7_1",
+            "to_stop_name": "三箇西",
+            "from_area_id": "area_S11_1",
+            "to_area_id": "area_S7_1",
+            "leg_group_id": "",
+            "fare_product_id": "community_270",
+            "fare_product_name": "コミュニティバス270円区間",
+            "rider_category_id": "senior_65_plus",
+            "fare_media_id": "cash",
+            "amount": 140
+          }
+        ],
+        "transfer_product_id": "",
+        "transfer_adjustment": 0,
+        "total": 140
+      },
+      "note": "65歳以上は現金・乗務員への声掛けが必要。270円の半額135円を10円単位へ切り上げて140円。"
+    },
+    {
+      "id": "south_disabled_child",
+      "title": "住道駅南 → 大東中央病院前（南部地域コミュニティバス）",
+      "before": "Fares v1では成人300円のみ。",
+      "after": {
+        "legs": [
+          {
+            "route_id": "R9",
+            "route_name": "中垣内コース：南部地域コミュニティバス",
+            "network_id": "daito_south",
+            "from_stop_id": "S54_1",
+            "from_stop_name": "住道駅南",
+            "to_stop_id": "S55_1",
+            "to_stop_name": "大東中央病院前",
+            "from_area_id": "area_S54_1",
+            "to_area_id": "area_S55_1",
+            "leg_group_id": "",
+            "fare_product_id": "south_300",
+            "fare_product_name": "南部地域コミュニティバス",
+            "rider_category_id": "disabled_child_south_taxi",
+            "fare_media_id": "cash",
+            "amount": 80
+          }
+        ],
+        "transfer_product_id": "",
+        "transfer_adjustment": 0,
+        "total": 80
+      },
+      "note": "対象手帳を持つ小児は80円。南部は現金のみ。"
+    },
+    {
+      "id": "cityhall_transfer",
+      "title": "南新田南 → 住道駅南で乗継 → 大東市役所庁舎前",
+      "before": "Fares v1では各乗車240円+120円=360円としてしか扱えず、乗継券の120円引きを計算できない。",
+      "after": {
+        "legs": [
+          {
+            "route_id": "R13",
+            "route_name": "南新田方面コース",
+            "network_id": "daito_community",
+            "from_stop_id": "S74_1",
+            "from_stop_name": "南新田南",
+            "to_stop_id": "S54_1",
+            "to_stop_name": "住道駅南",
+            "from_area_id": "area_S74_1",
+            "to_area_id": "area_S54_1",
+            "leg_group_id": "south_to_station_240",
+            "fare_product_id": "community_240",
+            "fare_product_name": "コミュニティバス240円区間",
+            "rider_category_id": "adult",
+            "fare_media_id": "cash",
+            "amount": 240
+          },
+          {
+            "route_id": "R11",
+            "route_name": "南新田・朋来コース：特定区間",
+            "network_id": "daito_community",
+            "from_stop_id": "S54_2",
+            "from_stop_name": "住道駅南",
+            "to_stop_id": "S10_1",
+            "to_stop_name": "大東市役所庁舎前",
+            "from_area_id": "area_S54_2",
+            "to_area_id": "area_S10_1",
+            "leg_group_id": "station_to_cityhall_south_120",
+            "fare_product_id": "community_120",
+            "fare_product_name": "コミュニティバス特定区間",
+            "rider_category_id": "adult",
+            "fare_media_id": "cash",
+            "amount": 120
+          }
+        ],
+        "transfer_product_id": "transfer_pay_120_standard",
+        "transfer_adjustment": -120,
+        "total": 240
+      },
+      "note": "最初のバスで紙の乗継券を受け取る運用条件がある。240+120-120=240円。"
+    }
+  ]
+}

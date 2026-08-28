@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>大東市 GTFS Fares v2 Before / After</title>
+  <style>
+    :root { color-scheme: light; --ink:#17221c; --muted:#607067; --paper:#f6f5ef; --card:#fff; --green:#176b4d; --pale:#e7f1eb; --line:#d6ddd7; --orange:#c95c2b; }
+    * { box-sizing:border-box; }
+    body { margin:0; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans JP",sans-serif; color:var(--ink); background:var(--paper); }
+    header { padding:44px 24px 32px; background:linear-gradient(120deg,#0f513b,#1f7958); color:#fff; }
+    header div, main { max-width:1000px; margin:auto; }
+    h1 { margin:0 0 10px; font-size:clamp(26px,5vw,46px); letter-spacing:-.03em; }
+    header p { max-width:760px; margin:0; line-height:1.7; opacity:.9; }
+    main { padding:28px 20px 60px; }
+    .notice { border-left:4px solid var(--orange); background:#fff8f4; padding:13px 16px; margin-bottom:22px; line-height:1.6; }
+    .tabs { display:flex; gap:8px; flex-wrap:wrap; margin:0 0 22px; }
+    button { border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:999px; padding:10px 15px; cursor:pointer; font:inherit; }
+    button[aria-selected="true"] { background:var(--green); border-color:var(--green); color:#fff; }
+    .journey { background:var(--card); border:1px solid var(--line); border-radius:18px; padding:clamp(20px,4vw,34px); box-shadow:0 12px 35px rgba(22,42,31,.07); }
+    h2 { margin:0 0 22px; font-size:clamp(21px,3vw,30px); }
+    .compare { display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+    .panel { padding:20px; border-radius:14px; border:1px solid var(--line); }
+    .panel.after { background:var(--pale); border-color:#bed5c7; }
+    .label { display:block; color:var(--muted); font-size:13px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px; }
+    .amount { color:var(--green); font-size:42px; font-weight:800; letter-spacing:-.04em; }
+    .route { margin:16px 0; padding-left:18px; border-left:2px solid var(--green); line-height:1.7; }
+    dl { display:grid; grid-template-columns:max-content 1fr; gap:7px 14px; margin:18px 0 0; font-size:14px; }
+    dt { color:var(--muted); } dd { margin:0; overflow-wrap:anywhere; }
+    .note { margin:20px 0 0; color:var(--muted); line-height:1.7; }
+    footer { max-width:1000px; margin:auto; padding:0 20px 38px; color:var(--muted); font-size:13px; }
+    @media (max-width:680px) { .compare { grid-template-columns:1fr; } header { padding-top:32px; } }
+  </style>
+</head>
+<body>
+  <header><div>
+    <h1>運賃データの Before / After</h1>
+    <p>大東市の公開GTFS-JPにFares v2を追加すると、成人運賃だけでなく、利用者区分・支払方法・限定された乗継条件まで、標準形式でたどれる可能性があります。</p>
+  </div></header>
+  <main>
+    <div class="notice">これはGTFS仕様上の表現を確認するPoCです。Google Mapsなど個別サービスで、同じ表示や計算が行われることを保証するものではありません。</div>
+    <nav class="tabs" id="tabs" aria-label="乗車例"></nav>
+    <section class="journey" id="journey" aria-live="polite"><p>データを読み込んでいます…</p></section>
+  </main>
+  <footer>出典: 大東市公式 令和8年度用GTFSデータおよび2026年4月1日改定後の公式運賃案内</footer>
+  <script>
+    const tabs = document.getElementById('tabs');
+    const journey = document.getElementById('journey');
+    const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+    function render(example, index) {
+      [...tabs.children].forEach((button, i) => button.setAttribute('aria-selected', String(i === index)));
+      const after = example.after;
+      const route = after.legs.map(leg => `${esc(leg.from_stop_name)} → ${esc(leg.to_stop_name)}（${esc(leg.route_name)}）`).join('<br>乗継<br>');
+      const products = after.legs.map(leg => esc(leg.fare_product_id)).join(' + ');
+      const transfer = after.transfer_product_id ? `${esc(after.transfer_product_id)}（調整 ${after.transfer_adjustment}円）` : 'なし';
+      journey.innerHTML = `
+        <h2>${esc(example.title)}</h2>
+        <div class="compare">
+          <article class="panel"><span class="label">Before · Fares v1</span><p>${esc(example.before)}</p></article>
+          <article class="panel after"><span class="label">After · Fares v2</span><div class="amount">${after.total.toLocaleString('ja-JP')}円</div><div class="route">${route}</div>
+            <dl><dt>利用者区分</dt><dd>${esc(after.legs[0].rider_category_id)}</dd><dt>支払媒体</dt><dd>${esc(after.legs[0].fare_media_id)}</dd><dt>運賃商品</dt><dd>${products}</dd><dt>乗継商品</dt><dd>${transfer}</dd></dl>
+          </article>
+        </div><p class="note">${esc(example.note)}</p>`;
+    }
+    fetch('examples.json').then(response => { if (!response.ok) throw new Error('load failed'); return response.json(); }).then(data => {
+      data.examples.forEach((example, index) => {
+        const button = document.createElement('button'); button.type = 'button'; button.textContent = `例${index + 1}`; button.setAttribute('aria-selected', 'false');
+        button.addEventListener('click', () => render(example, index)); tabs.appendChild(button);
+      }); render(data.examples[0], 0);
+    }).catch(() => { journey.innerHTML = '<p>examples.jsonを読み込めません。README記載の方法でローカルサーバーを起動してください。</p>'; });
+  </script>
+</body>
+</html>

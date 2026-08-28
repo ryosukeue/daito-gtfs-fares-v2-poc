@@ -1,0 +1,285 @@
+{
+  "source": "data/raw/daito_gtfs_2026.zip",
+  "sha256": "5b01bb8343b6f797af62ed23196a4a3b2c360fdbe20180a696481be209cd8503",
+  "files": {
+    "agency.txt": {
+      "rows": 1,
+      "fields": [
+        "agency_id",
+        "agency_name",
+        "agency_url",
+        "agency_timezone",
+        "agency_lang"
+      ],
+      "encoding": "utf-8-sig",
+      "has_empty_header": false
+    },
+    "calendar.txt": {
+      "rows": 7,
+      "fields": [
+        "service_id",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+        "sunday",
+        "start_date",
+        "end_date"
+      ],
+      "encoding": "utf-8-sig",
+      "has_empty_header": false
+    },
+    "calendar_dates.txt": {
+      "rows": 59,
+      "fields": [
+        "service_id",
+        "date",
+        "exception_type"
+      ],
+      "encoding": "utf-8-sig",
+      "has_empty_header": false
+    },
+    "fare_attributes.txt": {
+      "rows": 7,
+      "fields": [
+        "fare_id",
+        "price",
+        "currency_type",
+        "payment_method",
+        "transfers"
+      ],
+      "encoding": "utf-8-sig",
+      "has_empty_header": true
+    },
+    "fare_rules.txt": {
+      "rows": 1990,
+      "fields": [
+        "fare_id",
+        "route_id",
+        "origin_id",
+        "destination_id"
+      ],
+      "encoding": "utf-8-sig",
+      "has_empty_header": false
+    },
+    "feed_info.txt": {
+      "rows": 1,
+      "fields": [
+        "feed_publisher_name",
+        "feed_publisher_url",
+        "feed_lang",
+        "feed_start_date",
+        "feed_end_date"
+      ],
+      "encoding": "utf-8-sig",
+      "has_empty_header": false
+    },
+    "office_jp.txt": {
+      "rows": 0,
+      "fields": [
+        "office_id",
+        "office_name",
+        "office_phone"
+      ],
+      "encoding": "utf-8-sig",
+      "has_empty_header": false
+    },
+    "routes.txt": {
+      "rows": 17,
+      "fields": [
+        "route_id",
+        "agency_id",
+        "route_short_name",
+        "route_long_name",
+        "route_desc",
+        "route_type",
+        "route_color",
+        "jp_parent_route_id"
+      ],
+      "encoding": "utf-8-sig",
+      "has_empty_header": false
+    },
+    "routes_jp.txt": {
+      "rows": 17,
+      "fields": [
+        "route_id",
+        "route_update_date"
+      ],
+      "encoding": "utf-8-sig",
+      "has_empty_header": false
+    },
+    "stop_times.txt": {
+      "rows": 1893,
+      "fields": [
+        "trip_id",
+        "arrival_time",
+        "departure_time",
+        "stop_id",
+        "stop_sequence",
+        "stop_headsign",
+        "pickup_type",
+        "drop_off_type"
+      ],
+      "encoding": "utf-8-sig",
+      "has_empty_header": true
+    },
+    "stops.txt": {
+      "rows": 238,
+      "fields": [
+        "stop_id",
+        "stop_name",
+        "platform_code",
+        "stop_lat",
+        "stop_lon",
+        "zone_id",
+        "location_type",
+        "parent_station"
+      ],
+      "encoding": "utf-8-sig",
+      "has_empty_header": false
+    },
+    "translations.txt": {
+      "rows": 218,
+      "fields": [
+        "table_name",
+        "field_name",
+        "language",
+        "translation",
+        "record_id",
+        "field_value"
+      ],
+      "encoding": "utf-8-sig",
+      "has_empty_header": false
+    },
+    "trips.txt": {
+      "rows": 158,
+      "fields": [
+        "route_id",
+        "service_id",
+        "trip_id",
+        "trip_headsign",
+        "direction_id",
+        "block_id",
+        "shape_id"
+      ],
+      "encoding": "cp932",
+      "has_empty_header": false
+    }
+  },
+  "routes": [
+    {
+      "route_id": "R1",
+      "route_long_name": "三箇方面コース",
+      "trips": 48
+    },
+    {
+      "route_id": "R2",
+      "route_long_name": "三箇方面コース",
+      "trips": 25
+    },
+    {
+      "route_id": "R3",
+      "route_long_name": "野崎・寺川コース：東部地域乗合タクシー",
+      "trips": 3
+    },
+    {
+      "route_id": "R4",
+      "route_long_name": "野崎・寺川コース：東部地域乗合タクシー",
+      "trips": 3
+    },
+    {
+      "route_id": "R5",
+      "route_long_name": "西部方面コース：右回り",
+      "trips": 16
+    },
+    {
+      "route_id": "R6",
+      "route_long_name": "西部方面コース：左回り",
+      "trips": 16
+    },
+    {
+      "route_id": "R7",
+      "route_long_name": "中垣内コース：東部地域乗合タクシー",
+      "trips": 3
+    },
+    {
+      "route_id": "R8",
+      "route_long_name": "中垣内コース：東部地域乗合タクシー",
+      "trips": 3
+    },
+    {
+      "route_id": "R9",
+      "route_long_name": "中垣内コース：南部地域コミュニティバス",
+      "trips": 7
+    },
+    {
+      "route_id": "R10",
+      "route_long_name": "南新田・朋来コース：特定区間",
+      "trips": 1
+    },
+    {
+      "route_id": "R11",
+      "route_long_name": "南新田・朋来コース：特定区間",
+      "trips": 1
+    },
+    {
+      "route_id": "R12",
+      "route_long_name": "南新田方面コース",
+      "trips": 11
+    },
+    {
+      "route_id": "R13",
+      "route_long_name": "南新田方面コース",
+      "trips": 11
+    },
+    {
+      "route_id": "R14",
+      "route_long_name": "朋来コース：南部地域コミュニティバス",
+      "trips": 3
+    },
+    {
+      "route_id": "R15",
+      "route_long_name": "朋来方面コース",
+      "trips": 1
+    },
+    {
+      "route_id": "R16",
+      "route_long_name": "北条コース：東部地域乗合タクシー",
+      "trips": 3
+    },
+    {
+      "route_id": "R17",
+      "route_long_name": "北条コース：東部地域乗合タクシー",
+      "trips": 3
+    }
+  ],
+  "fare_rule_counts": {
+    "Fare120yen_00": 35,
+    "Fare240yen_00": 300,
+    "Fare270yen_00": 154,
+    "Fare300yen_00": 850,
+    "Fare330yen_00": 418,
+    "Fare350yen_00": 207,
+    "Fare390yen_00": 26
+  },
+  "issues": [
+    {
+      "severity": "WARNING",
+      "check": "empty_header",
+      "file": "fare_attributes.txt"
+    },
+    {
+      "severity": "WARNING",
+      "check": "empty_header",
+      "file": "stop_times.txt"
+    },
+    {
+      "severity": "ERROR",
+      "check": "not_utf8",
+      "file": "trips.txt",
+      "encoding": "cp932"
+    }
+  ]
+}

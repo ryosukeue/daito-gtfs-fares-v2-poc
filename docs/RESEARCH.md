@@ -101,8 +101,8 @@
 - **内容（確認済み）**: コミュニティバス路線のみ。市役所と南新田・朋来/西部方面を住道駅で乗り継ぐ際に、最初のバスで乗継券を受け取る。2台目から大人120円、小児60円、対象障害者大人60円、対象障害者小児30円、65歳以上60円を割引。120円区間同士は全員120円引き。
 - **出典URL**: https://www.city.daito.lg.jp/site/kokyokotsu/69160.html
 - **確認日**: 2026-08-28
-- **表現可能性**: leg groupと負額のtransfer fare product、`fare_transfer_type=1` で算術は表現可能。
-- **Fares v2案**: GTFS内の住道駅各停留所と市役所を結ぶ実際のO-Dだけにleg groupを付与する。紙の乗継券をfare media type 1とする。
+- **表現可能性**: leg groupとtransfer fare productで算術を表現可能。公式仕様は負額も認めるが、使用Validatorとの互換性を高めるため「2乗車目で追加支払いする額」を非負で持たせる方式を採用した。
+- **Fares v2案**: GTFS内の住道駅各停留所と市役所を結ぶ実際のO-Dだけにleg groupを付与し、`fare_transfer_type=0` で1乗車目と乗継後追加支払額を合算する。紙の乗継券をfare media type 1とする。
 - **不明点**: 有効時間は公式ページに明記がないため `duration_limit` を設定しない。consumerが紙券発行条件まで扱う保証はない。
 
 ## 9. 定期券

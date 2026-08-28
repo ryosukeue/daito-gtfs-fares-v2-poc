@@ -1,0 +1,31 @@
+{
+  "input": "/Users/ryosukeue/Documents/Codex/2026-08-28/gtfs-fares-v2-poc-gtfs-gtfs/dist/daito_gtfs_fares_v2.zip",
+  "summary": {
+    "errors": 0,
+    "warnings": 0,
+    "notices": 0
+  },
+  "tables": {
+    "agency.txt": 1,
+    "areas.txt": 144,
+    "calendar.txt": 7,
+    "calendar_dates.txt": 59,
+    "fare_attributes.txt": 7,
+    "fare_leg_rules.txt": 1879,
+    "fare_media.txt": 5,
+    "fare_products.txt": 63,
+    "fare_rules.txt": 1990,
+    "fare_transfer_rules.txt": 8,
+    "feed_info.txt": 1,
+    "office_jp.txt": 0,
+    "rider_categories.txt": 7,
+    "routes.txt": 17,
+    "routes_jp.txt": 17,
+    "stop_areas.txt": 144,
+    "stop_times.txt": 1893,
+    "stops.txt": 238,
+    "translations.txt": 218,
+    "trips.txt": 158
+  },
+  "notices": []
+}

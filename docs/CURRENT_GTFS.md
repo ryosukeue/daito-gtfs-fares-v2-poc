@@ -23,9 +23,9 @@ SHA-256: `5b01bb8343b6f797af62ed23196a4a3b2c360fdbe20180a696481be209cd8503`
 | fare_attributes.txt | 7 | Fares v1価格 |
 | fare_rules.txt | 1,990 | route・乗車地・降車地別のFares v1規則 |
 | feed_info.txt | 1 | 発行者と有効期間 |
-| routes_jp.txt | 4 | GTFS-JP拡張の系統グループ |
-| office_jp.txt | 1 | 営業所情報 |
-| translations.txt | 238 | 読み仮名等 |
+| routes_jp.txt | 17 | GTFS-JP拡張の系統グループ |
+| office_jp.txt | 0 | 営業所情報（ヘッダのみ） |
+| translations.txt | 218 | 読み仮名等 |
 
 ## agency
 
@@ -113,7 +113,9 @@ SHA-256: `5b01bb8343b6f797af62ed23196a4a3b2c360fdbe20180a696481be209cd8503`
 
 1. `trips.txt` だけがCP932/Shift_JIS系で、他の日本語ファイルはUTF-8。GTFSはUTF-8を要求するため、原本は文字コードエラーになり得る。
 2. `fare_attributes.txt` と `stop_times.txt` の末尾に空の列名がある。内容は壊していないが不要なヘッダである。
-3. shapes.txtがない。仕様上はroute-based serviceに推奨されるためValidator警告候補だが、本PoCは運賃が主対象であり、根拠のない経路形状は生成しない。
-4. route_colorが白でroute_text_color省略のため、表示上のコントラスト警告候補。
+3. `stops.txt` の総合文化センター3行で小数点がカンマに崩れ、緯度経度以降が10列に分割されている。元の数値断片から `34.704536,135.6238244` に復元できる。
+4. R4のstop_times 25停留所がplatformではなくparent stationを参照する。方向別の既存platformへ付け替える必要がある。
+5. shapes.txtがない。仕様上はroute-based serviceに推奨されるが、本PoCは運賃が主対象であり、根拠のない経路形状は生成しない。
+6. route_colorが白でroute_text_color省略のため、表示上のコントラスト課題候補。
 
-PoC出力では1と2を正規化する。3と4は原本由来の非運賃課題として残し、検証結果に記録する。
+PoC出力では1〜4を、元の数値断片・親子stop関係・方向別platformという検証可能な根拠で正規化する。5と6は原本由来の非運賃課題として残す。
